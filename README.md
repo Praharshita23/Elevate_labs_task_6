@@ -45,7 +45,9 @@ SET date = STR_TO_DATE(date, '%m/%d/%Y');
 
 ALTER TABLE online_sales
 MODIFY date DATE;
+
 SQL Query for Monthly Sales Trend
+
 SELECT 
     YEAR(date) AS year,
     MONTHNAME(date) AS month,
@@ -67,12 +69,7 @@ Total Revenue
 
 Total Number of Orders
 
-Example Output:
-Year	Month	Total Revenue	Total Orders
-2019	January	4516614.82	44
-2019	February	2895563.90	44
-2019	March	2521827.99	41
-...	...	...	...
+
 
 Key Insights
 
@@ -84,6 +81,8 @@ Noticeable seasonal variation is observed in revenue distribution.
 
 Certain months show peak revenue performance.
 
+
+
 Project Files
 
 Dataset used
@@ -93,6 +92,8 @@ task_6.sql → Complete SQL script (data cleaning + aggregation)
 task_6_results.csv → Exported monthly results table
 
 Screenshot of SQL execution and output
+
+
 
 Skills Demonstrated
 
