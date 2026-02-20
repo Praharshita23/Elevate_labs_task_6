@@ -1,110 +1,89 @@
-Task 6: Sales Trend Analysis Using SQL
+Elevate Labs – Task 6
+Sales Trend Analysis Using SQL
+📌 Objective
 
-Objective
+The objective of this task is to analyze monthly sales trends using SQL. The analysis focuses on calculating monthly revenue and total order volume from the sales dataset covering the years 2019–2020.
 
-The objective of this task is to analyze monthly sales trends using SQL aggregation techniques. The analysis focuses on identifying:
+🗂 Dataset Information
 
-Monthly Revenue
+Dataset Used: Sales-Export_2019-2020.csv
 
-Monthly Order Volume
+The dataset contains sales transaction records with the following important fields:
 
-The dataset contains sales transactions from 2019–2020.
+Order ID (unique identifier for each transaction)
 
-Dataset Overview
+Order Value (sales amount in EUR)
 
-Dataset Name: Sales-Export_2019-2020.csv
+Order Date
 
-Key Columns Used:
+Cost
 
-order_id – Unique order identifier
+Additional descriptive attributes such as country, category, sales manager, and sales representative
 
-order_value_EUR – Sales amount per order
+🛠 Data Cleaning Process
 
-date – Order date
+Before performing the analysis, several preprocessing steps were completed in MySQL to ensure accurate aggregation and proper date-based grouping.
 
-cost – Cost of the order
+The cleaning process included:
 
-Data Cleaning Steps (Performed in MySQL)
+Renaming the imported table for easier reference
 
-Before analysis, the following preprocessing steps were completed to ensure accurate aggregation and date-based grouping.
+Removing comma separators from the revenue column
 
-1. Rename Imported Table
-RENAME TABLE `sales-export_2019-2020`
-TO online_sales;
-2. Disable Safe Update Mode
-SET SQL_SAFE_UPDATES = 0;
-3. Remove Commas from Revenue Column
-UPDATE online_sales
-SET order_value_EUR = REPLACE(order_value_EUR, ',', '');
-4. Convert Revenue to Numeric Type
-ALTER TABLE online_sales
-MODIFY order_value_EUR DECIMAL(12,2);
-5. Convert Date from TEXT to DATE Format
-UPDATE online_sales
-SET date = STR_TO_DATE(date, '%m/%d/%Y');
+Converting the revenue column from text format to numeric format
 
-ALTER TABLE online_sales
-MODIFY date DATE;
+Converting the date column from text to proper DATE format
 
-SQL Query for Monthly Sales Trend
+Temporarily disabling safe update mode to allow data modification
 
-SELECT 
-    YEAR(date) AS year,
-    MONTHNAME(date) AS month,
-    SUM(order_value_EUR) AS total_revenue,
-    COUNT(DISTINCT order_id) AS total_orders
-FROM online_sales
-GROUP BY YEAR(date), MONTH(date), MONTHNAME(date)
-ORDER BY YEAR(date), MONTH(date);
+These steps ensured that numerical calculations and date functions worked correctly during aggregation.
 
-Results
+📊 Analysis Performed
 
-The query generated a monthly summary table including:
+The analysis focused on:
 
-Year
+Extracting year and month from the order date
 
-Month Name
+Calculating total monthly revenue
 
-Total Revenue
+Counting the number of unique orders per month
 
-Total Number of Orders
+Sorting the results chronologically to observe trends
 
+This allowed identification of revenue fluctuations and order patterns across different months.
 
+📈 Key Insights
 
-Key Insights
+Sales revenue shows noticeable variation across different months.
 
-Sales revenue fluctuates significantly across months.
+Order volume remains relatively stable month to month.
 
-Order volume remains relatively stable between 35–50 orders per month.
+Certain months exhibit higher revenue peaks, indicating potential seasonal effects.
 
-Noticeable seasonal variation is observed in revenue distribution.
+Revenue patterns suggest variation in order values across different periods.
 
-Certain months show peak revenue performance.
+📂 Project Files
 
+task_6.sql – Complete SQL script including cleaning and aggregation
 
-
-Project Files
-
-Dataset used
-
-task_6.sql → Complete SQL script (data cleaning + aggregation)
-
-task_6_results.csv → Exported monthly results table
+task_6_results.csv – Exported monthly results table
 
 Screenshot of SQL execution and output
 
-
-
-Skills Demonstrated
+🧠 Skills Demonstrated
 
 SQL Data Cleaning
 
 Data Type Conversion
 
-Date Formatting & Extraction
+Date Formatting and Extraction
 
-Aggregation (SUM, COUNT)
+Aggregation using SUM and COUNT
 
-GROUP BY & ORDER BY
+GROUP BY and ORDER BY
 
-Trend Analysis
+Time-based Trend Analysis
+
+- Conclusion
+
+This project demonstrates the ability to clean raw transactional data, convert data types appropriately, and perform time-based aggregation using SQL. The monthly sales trend analysis provides meaningful insights into revenue distribution and order behavior over time.
